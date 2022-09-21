@@ -494,7 +494,7 @@ namespace rdo_bc
 		
 	bool rdo_bc_encoder::encode_texture()
 	{
-		clock_t start_t = clock();
+		unsigned start_ms = utils::millis();
 
 		uint32_t bc7_mode_hist[8];
 		memset(bc7_mode_hist, 0, sizeof(bc7_mode_hist));
@@ -641,11 +641,11 @@ namespace rdo_bc
 			}
 		}
 
-		clock_t end_t = clock();
+		unsigned end_ms = utils::millis();
 
 		if (m_params.m_status_output)
 		{
-			printf("\nTotal encoding time: %f secs\n", (double)(end_t - start_t) / CLOCKS_PER_SEC);
+			printf("\nTotal encoding time: %f secs\n", (double)(end_ms - start_ms) / 1000);
 
 			if (m_params.m_dxgi_format == DXGI_FORMAT_BC7_UNORM)
 			{
@@ -746,7 +746,7 @@ namespace rdo_bc
 
 			uint32_t total_modified = 0;
 
-			clock_t rdo_start_t = clock();
+			unsigned rdo_start_ms = utils::millis();
 
 #pragma omp parallel for
 			for (int p = 0; p < rdo_total_threads; p++)
@@ -774,11 +774,11 @@ namespace rdo_bc
 				}
 			} // p
 
-			clock_t rdo_end_t = clock();
+			unsigned rdo_end_ms = utils::millis();
 
 			if (m_params.m_status_output)
 			{
-				printf("Total RDO time: %f secs\n", (double)(rdo_end_t - rdo_start_t) / CLOCKS_PER_SEC);
+				printf("Total RDO time: %f secs\n", (double)(rdo_end_ms - rdo_start_ms) / 1000);
 
 				printf("Total blocks modified: %u %3.2f%%\n", total_modified, total_modified * 100.0f / m_total_blocks);
 
@@ -862,7 +862,7 @@ namespace rdo_bc
 
 			uint32_t total_modified_r = 0, total_modified_g = 0;
 
-			clock_t rdo_start_t = clock();
+			unsigned rdo_start_ms = utils::millis();
 
 #pragma omp parallel for
 			for (int p = 0; p < rdo_total_threads; p++)
@@ -891,11 +891,11 @@ namespace rdo_bc
 				}
 			} // p
 
-			clock_t rdo_end_t = clock();
+			unsigned rdo_end_ms = utils::millis();
 
 			if (m_params.m_status_output)
 			{
-				printf("Total RDO time: %f secs\n", (double)(rdo_end_t - rdo_start_t) / CLOCKS_PER_SEC);
+				printf("Total RDO time: %f secs\n", (double)(rdo_end_ms - rdo_start_ms) / 1000);
 
 				printf("Total blocks modified R: %u %3.2f%%\n", total_modified_r, total_modified_r * 100.0f / m_total_blocks);
 				printf("Total blocks modified G: %u %3.2f%%\n", total_modified_g, total_modified_g * 100.0f / m_total_blocks);
@@ -930,7 +930,7 @@ namespace rdo_bc
 
 			uint32_t total_modified = 0;
 
-			clock_t rdo_start_t = clock();
+			unsigned rdo_start_ms = utils::millis();
 
 #pragma omp parallel for
 			for (int p = 0; p < rdo_total_threads; p++)
@@ -953,11 +953,11 @@ namespace rdo_bc
 				}
 			} // p
 
-			clock_t rdo_end_t = clock();
+			unsigned rdo_end_ms = utils::millis();
 
 			if (m_params.m_status_output)
 			{
-				printf("Total RDO time: %f secs\n", (double)(rdo_end_t - rdo_start_t) / CLOCKS_PER_SEC);
+				printf("Total RDO time: %f secs\n", (double)(rdo_end_ms - rdo_start_ms) / 1000);
 
 				printf("Total blocks modified: %u %3.2f%%\n", total_modified, total_modified * 100.0f / m_total_blocks);
 			}
@@ -992,7 +992,7 @@ namespace rdo_bc
 
 			uint32_t total_modified = 0;
 
-			clock_t rdo_start_t = clock();
+			unsigned rdo_start_ms = utils::millis();
 
 #pragma omp parallel for
 			for (int p = 0; p < rdo_total_threads; p++)
@@ -1020,11 +1020,11 @@ namespace rdo_bc
 				}
 			} // p
 
-			clock_t rdo_end_t = clock();
+			unsigned rdo_end_ms = utils::millis();
 
 			if (m_params.m_status_output)
 			{
-				printf("Total RDO time: %f secs\n", (double)(rdo_end_t - rdo_start_t) / CLOCKS_PER_SEC);
+				printf("Total RDO time: %f secs\n", (double)(rdo_end_ms - rdo_start_ms) / 1000);
 
 				printf("Total blocks modified: %u %3.2f%%\n",
 					total_modified, total_modified * 100.0f / m_total_blocks);
@@ -1095,7 +1095,7 @@ namespace rdo_bc
 			block_unpackers.m_allow_3color_mode = false;
 			block_unpackers.m_use_bc1_3color_mode_for_black = false;
 
-			clock_t rdo_start_t = clock();
+			unsigned rdo_start_ms = utils::millis();
 
 #pragma omp parallel for
 			for (int p = 0; p < rdo_total_threads; p++)
@@ -1129,11 +1129,11 @@ namespace rdo_bc
 				}
 			} // p
 
-			clock_t rdo_end_t = clock();
+			unsigned rdo_end_ms = utils::millis();
 
 			if (m_params.m_status_output)
 			{
-				printf("Total RDO time: %f secs\n", (double)(rdo_end_t - rdo_start_t) / CLOCKS_PER_SEC);
+				printf("Total RDO time: %f secs\n", (double)(rdo_end_ms - rdo_start_ms) / 1000);
 
 				printf("Total RGB blocks modified: %u %3.2f%%\n", total_modified_rgb, total_modified_rgb * 100.0f / m_total_blocks);
 				printf("Total Alpha blocks modified: %u %3.2f%%\n", total_modified_alpha, total_modified_alpha * 100.0f / m_total_blocks);

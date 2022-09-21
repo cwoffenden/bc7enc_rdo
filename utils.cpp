@@ -3,8 +3,21 @@
 #include "lodepng.h"
 #include "miniz.h"
 
+#if __cplusplus >= 201103L
+#include <chrono>
+#endif
+
 namespace utils 
 {
+
+unsigned millis() {
+#if __cplusplus >= 201103L
+	return static_cast<unsigned>(std::chrono::duration_cast<std::chrono::milliseconds>(
+						  std::chrono::steady_clock::now().time_since_epoch()).count());
+#else
+	return static_cast<unsigned>((clock() * 1000LL) / CLOCKS_PER_SEC);
+#endif
+}
 		
 #define FLOOD_PUSH(y, xl, xr, dy) if (((y + (dy)) >= 0) && ((y + (dy)) < (int)m_height)) { stack.push_back(fill_segment(y, xl, xr, dy)); }
 

@@ -683,7 +683,7 @@ int main(int argc, char* argv[])
 				source_image(x, y)[3] = source_alpha_image(x, y)[1];
 	}
 
-	clock_t overall_start_t = clock();
+	unsigned overall_start_ms = utils::millis();
 
 	rdo_bc::rdo_bc_encoder encoder;
 	if (!encoder.init(source_image, rp))
@@ -706,10 +706,10 @@ int main(int argc, char* argv[])
 		return EXIT_FAILURE;
 	}
 
-	clock_t overall_end_t = clock();
+	unsigned overall_end_ms = utils::millis();
 
 	if (rp.m_status_output)
-		printf("Total processing time: %f secs\n", (double)(overall_end_t - overall_start_t) / CLOCKS_PER_SEC);
+		printf("Total processing time: %f secs\n", (double)(overall_end_ms - overall_start_ms) / 1000);
 
 	// Compress the output data losslessly using Deflate
 	const uint32_t output_data_size = encoder.get_total_blocks_size_in_bytes();

@@ -43,6 +43,9 @@ enum eClear { cClear };
 enum eZero { cZero };
 enum eInitExpand { cInitExpand };
 
+// elapsed time in milliseconds (only valid for calculating time differences)
+unsigned millis();
+
 inline int iabs(int i) { if (i < 0) i = -i; return i; }
 inline uint8_t clamp255(int32_t i) { return (uint8_t)((i & 0xFFFFFF00U) ? (~(i >> 31)) : i); }
 template <typename S> inline S clamp(S value, S low, S high) { return (value < low) ? low : ((value > high) ? high : value); }
